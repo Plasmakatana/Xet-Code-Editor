@@ -13,23 +13,39 @@ On Kitty
 ## For linux
   Install dependencies
   #### Arch
-  '''sudo pacman -S make'''
+  ```bash
+sudo pacman -S make
+```
   #### Fedora
-  '''sudo dnf install make'''
+  ```bash
+sudo dnf install make
+```
   #### Debian/Ubuntu
-  '''sudo apt-get install make'''
+  ```bash
+sudo apt-get install make
+```
   ### Git clone into directory
-  '''git clone https://github.com/Plasmakatana/Xet-Code-Editor.git'''
+  ```bash
+git clone https://github.com/Plasmakatana/Xet-Code-Editor.git
+```
   ### Run the Makefile with 
-  ```make```
+  ```
+  make
+```
 ## For Windows
   -Install any 64-bit c/c++ compiler
   ### Git clone into any directory
-  '''git clone https://github.com/Plasmakatana/Xet-Code-Editor.git'''
+  ```powershell
+git clone https://github.com/Plasmakatana/Xet-Code-Editor.git
+```
   ### Run the following commands depending on the compiler
-  '''gcc -o Xet main.c -std=c99'''
+  ```powershell
+gcc -o Xet main.c -std=c99
+```
   OR
-  '''g++ -o Xet main.c'''
+  ```powershell
+g++ -o Xet main.c
+```
 # Usage
   - After installation, either browse to the directory of installation
     or

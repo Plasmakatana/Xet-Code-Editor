@@ -7,7 +7,7 @@ On Kitty
 ![Kitty](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-kitty.png)
 ### C and Python support
 ![support](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-py.png)
-### Search feature
+### Find feature
 ![search](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-search.png)
 # Installation
 ## For linux
@@ -57,7 +57,7 @@ g++ -o Xet main.c
     where "args" is the file-location of the file to be loaded 
     into the editor.
     Leave blank if creating new file.
-  ## OR
+  #### OR
   - Use the following command:
     ```<path/to/editor/Xet> <args>``` on linux
     OR
@@ -66,3 +66,9 @@ g++ -o Xet main.c
     ```/.bashrc``` or ```/.zshrc``` files on linux
     OR
     add ```<path\to\editor\>``` to ```PATHs``` on windows
+## Shortcuts
+Movement keys:<kbd>Left</kbd><kbd>Right</kbd><kbd>Up</kbd><kbd>Down</kbd>
+Large movement keys:<kbd>PgUp</kbd><kbd>PgDn</kbd><kbd>Home</kbd><kbd>End</kbd>
+Find: <kbd>Ctrl</kbd>+<kbd>F</kbd>
+Save: <kbd>Ctrl</kbd>+<kbd>S</kbd>
+Quit: <kbd>Ctrl</kbd>+<kbd>Q</kbd> (twice in case of edited file)

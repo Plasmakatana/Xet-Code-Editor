@@ -67,7 +67,7 @@ g++ -o Xet main.c
     OR
     add ```<path\to\editor\>``` to ```PATHs``` on windows
 ## Shortcuts
-Movement keys:<kbd>Left</kbd><kbd>Right</kbd><kbd>Up</kbd><kbd>Down</kbd>
+Movement keys:<kbd>&larr</kbd><kbd>&rarr</kbd><kbd>&uarr</kbd><kbd>&darr</kbd>
 Large movement keys:<kbd>PgUp</kbd><kbd>PgDn</kbd><kbd>Home</kbd><kbd>End</kbd>
 Find: <kbd>Ctrl</kbd>+<kbd>F</kbd>
 Save: <kbd>Ctrl</kbd>+<kbd>S</kbd>

@@ -51,22 +51,22 @@ g++ -o Xet main.c
     or
     move the executable file to the desired location
   - Use standard commands 
-    ```./Xet <args>``` on linux 
+    ```./Xet filepath``` on linux 
     OR
-    ```.\Xet.exe <args>``` on windows 
-    where "args" is the file-location of the file to be loaded 
+    ```.\Xet.exe filepath``` on windows 
+    where "filepath" is the file-location of the file to be loaded 
     into the editor.
     Leave blank if creating new file.
   #### OR
   - Use the following command:
-    ```<path/to/editor/Xet> <args>``` on linux
+    ```path/to/editor/Xet filepath``` on linux
     OR
-    ```<path\to\editor\Xet.exe> <args>``` on windows
-  - You can also add ```<path/to/editor/Xet>``` to the
+    ```path\to\editor\Xet.exe filepath``` on windows
+  - You can also add ```path/to/editor/Xet``` to the
     ```/.bashrc``` or ```/.zshrc``` files like so:
     ```zsh
     Xet(){
-      <path/to/executable>/Xet "$@"
+      path/to/executable/Xet "$@"
     }
     ```
     and then
@@ -78,7 +78,7 @@ g++ -o Xet main.c
     source ~/.bashrc
     ```
     FOR WINDOWS
-    add ```<path\to\editor\>``` to ```PATHs``` on windows
+    add ```path\to\editor\``` to ```PATHs``` on windows
 ## Shortcuts
   - Movement keys: &larr; &rarr; &uarr; &darr;
   - Large movement keys:<kbd>PgUp</kbd><kbd>PgDn</kbd><kbd>Home</kbd><kbd>End</kbd>

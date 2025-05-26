@@ -16,9 +16,13 @@ On Kitty
   ```bash
 sudo pacman -S make
 ```
-  #### Fedora
+  #### Fedora/Redhat
   ```bash
 sudo dnf install make
+```
+  #### CentOS/Redhat
+  ```bash
+sudo yum install make
 ```
   #### Debian/Ubuntu
   ```bash

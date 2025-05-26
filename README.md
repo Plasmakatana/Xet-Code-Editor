@@ -64,20 +64,20 @@ g++ -o Xet main.c
     ```<path\to\editor\Xet.exe> <args>``` on windows
   - You can also add ```<path/to/editor/Xet>``` to the
     ```/.bashrc``` or ```/.zshrc``` files like so:
-    ```
-Xet(){
-  <path/to/executable>/Xet "$@"
-}
+    ```zsh
+    Xet(){
+      <path/to/executable>/Xet "$@"
+    }
     ```
     and then
-    ```
+    ```zsh
     source ~/.zshrc
     ```
     or
-    ```
+    ```bash
     source ~/.bashrc
     ```
-    OR
+    FOR WINDOWS
     add ```<path\to\editor\>``` to ```PATHs``` on windows
 ## Shortcuts
   - Movement keys: &larr; &rarr; &uarr; &darr;

@@ -2,4 +2,4 @@
 A lightweight and customizable Code Editor with RGB support written in pure C.
 # DEMOS
 On Ghostty
-[Ghostty](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-ghostty.png)
+![Ghostty](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-ghostty.png)

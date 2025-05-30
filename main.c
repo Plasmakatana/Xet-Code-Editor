@@ -71,17 +71,17 @@ struct editorConfig{
   char* filename;
   char statusmsg[80];
   time_t statusmsg_time;
-  char dflt[19];
-  char digits[19];
-  char strings[19];
-  char match[19];
-  char comments[19];
-  char keywords1[19];
-  char keywords2[19];
-  char sep[19];
-  char bg[19];
-  char nbg[19];
-  char np[19];
+  char dflt[20];
+  char digits[20];
+  char strings[20];
+  char match[20];
+  char comments[20];
+  char keywords1[20];
+  char keywords2[20];
+  char sep[20];
+  char bg[20];
+  char nbg[20];
+  char np[20];
   struct editorSyntax *syntax;
 };
 struct editorConfig E;
@@ -90,16 +90,44 @@ struct editorConfig E;
 //C/C++
 char* C_HL_extensions[]={".c",".h",".cpp",".hpp",NULL};
 char* PY_HL_extensions[]={".py",".ipynb",".pyc",".pyo",".pyw",".pyz",".pyd",".pyi",".pyx",NULL};
+char* JS_HL_extensions[]={".js",".jsx",".ts",".tsx","mjs","cjs",NULL};
+char* JV_HL_extensions[]={".java",".class",".jar",".war",".ear",NULL};
+char* RS_HL_extensions[]={".rs",".rlib",".so",".dylib",NULL};
+char* GO_HL_extensions[]={".go",NULL};
+char* BIN_HL_extension[]={".exe",".dll",".a",NULL};
+char* ML_HL_extensions[]={".toml",".yaml",".xml",".html",".json",NULL};
+char* CFG_HL_extensions[]={".cfg",".conf",".config",".ini",NULL};
 //will implement new highlight type for all included libraries later
 char* C_HL_keywords[]={
   "switch","if","while","for","break","continue","return","else",
   "#include","#define","assert.h|",
-  "complex.h|", "unistd.h|","termios.h|","fcntl.h|","sys/ioctl.h|","sys/types.h|","ctype.h|",  "errno.h|",  "fenv.h|","float.h|",  "inttypes.h|",  "iso646.h|",  "limits.h|",  "locale.h|",  "math.h|",  "setjmp.h|",  "signal.h|","stdalign.h|",  "stdarg.h|",  "stdatomic.h|",  "stdbool.h|",  "stddef.h|",  "stdint.h|",  "stdio.h|",  "stdlib.h|",  "stdnoreturn.h|",  "string.h|",  "tgmath.h|",  "threads.h|",  "time.h|",  "uchar.h|",  "wchar.h|","wctype.h|","struct","union","typedef","static","enum","class","case",
-  "int|","long|","double|","float|","char|","unsigned|","signed|","void|", NULL};
+  "complex.h|", "unistd.h|","termios.h|","fcntl.h|","sys/ioctl.h|","sys/types.h|","ctype.h|",  "errno.h|",  "fenv.h|","float.h|",  
+  "inttypes.h|",  "iso646.h|",  "limits.h|",  "locale.h|",  "math.h|",  "setjmp.h|",  "signal.h|","stdalign.h|",  "stdarg.h|",  "stdatomic.h|",  
+  "stdbool.h|",  "stddef.h|",  "stdint.h|",  "stdio.h|",  "stdlib.h|",  "stdnoreturn.h|",  "string.h|",  "tgmath.h|",  "threads.h|",  "time.h|",  
+  "uchar.h|",  "wchar.h|","wctype.h|","struct","union","typedef","static","enum","class","case",
+  "int|","uint|","long|","double|","float|","char|","unsigned|","signed|","void|", NULL};
 char* PY_HL_keywords[]={"def","return","if","for","in","import","as","from","class","with",
         "int|","float|","str|","list|","dict|","tuple|","set|","bool|",
 	"numpy|","pandas|","requests|","os|","sys|","matplotlib|","scikit-learn|","tensorflow|","django|","flask|",
 	NULL};
+char* JS_HL_keywords[]={"break","case","catch","class","const","continue","debugger","default","delete","do","else",
+  "export","extends","false","finally","for","function","if","import","in","instanceof","new","null","return","super","switch","console",
+  "this","throw","true","try","typeof","var","void","while","with","yield","await","enum","implements","interface","let","package","private",
+  "protected","public","static","number|","string|","boolean|","null|","undefined|","symbol|","bigint|","object|","function|",NULL};
+char* JV_HL_keywords[]={"abstract","assert","boolean","break","byte","case","catch","char","class","const","continue","default","do","double",
+  "else","enum","extends","final","finally","float","for","goto","if","implements","import","instanceof","int","interface","long","native","new",
+  "package","private","protected","public","return","short","static","strictfp","super","switch","synchronized","this","throw","throws","transient",
+  "try","void","volatile","while","byte|","short|","int|","long|","float|","double|","boolean|","char|","String|","Array|","Class|","Interface|","Enum|",NULL};
+char* RS_HL_keywords[]={"as","async","await","break","const","continue","crate","dyn","else","enum","extern","false","fn","for","if","impl","in","let","loop",
+  "match","mod","move","mut","pub","ref","return","Self","self","static","struct","super","trait","true","type","union","unsafe","use","where","while",
+  "i8|","i16|","i32|","i64|","i128|","isize|","u8|","u16|","u32|","u64|","u128|","usize|","f32|","f64|","bool|","char|","Tuple|","Array|","Vector|",NULL};
+char* GO_HL_keywords[]={"break","case","chan","const","continue","defer","else","fallthrough","for","func","go","goto","if","import","interface","map",
+  "package","range","return","select","struct","switch","type","var","int|","int8|","int16|","int32|","int64|","uint|","uint8|","uint16|","uint32|","uint64|",
+  "uintptr|","float32|","float64|","complex64|","complex128|","bool|","string|","byte|","rune|","array|","slice|","map|","struct|","pointer|","function|",
+  "channel|",NULL};
+char* BIN_HL_keywords[]={NULL};
+char* ML_HL_keywords[]={NULL};
+char* CFG_HL_keywords[]={NULL};
 struct editorSyntax HLDB[]={
   {
     "c",
@@ -117,7 +145,64 @@ struct editorSyntax HLDB[]={
     "/*",
     "*/",
     HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
-  }
+  },
+  {
+  "java",
+  JV_HL_extensions,
+  JV_HL_keywords,
+  "//",
+  "/*",
+  "*/",
+  HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
+  },
+  {"javascript/typescript",
+  JS_HL_extensions,
+  JS_HL_keywords,
+  "//",
+  "/*",
+  "*/",
+  HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
+  },
+  {"Rust",
+  RS_HL_extensions,
+  RS_HL_keywords,
+  "//",
+  "/*",
+  "*/",
+  HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
+  },
+  {"Go",
+  GO_HL_extensions,
+  GO_HL_keywords,
+  "//",
+  "/*",
+  "*/",
+  HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
+  },
+  {"Binary",
+  BIN_HL_extension,
+  BIN_HL_keywords,
+  "#",
+  "~",
+  "~",
+  HL_HIGHLIGHT_NUMBERS | HL_HIGHLIGHT_STRINGS
+  },
+  {"Markup",
+  ML_HL_extensions,
+  ML_HL_keywords,
+  "#",
+  "<!--",
+  "-->",
+  HL_HIGHLIGHT_NUMBERS|HL_HIGHLIGHT_STRINGS
+  },
+  {"Config",
+  CFG_HL_extensions,
+  CFG_HL_keywords,
+  "#",
+  "/*",
+  "*/",
+  HL_HIGHLIGHT_NUMBERS|HL_HIGHLIGHT_STRINGS
+  },
 };
 #define HLDB_ENTRIES (sizeof(HLDB) / sizeof(HLDB[0]))
 /*proto*/
@@ -127,7 +212,7 @@ char* editorPrompt(char* prompt,void(*callback)(char*,int));
 
 /*def*/
 #define CTRL_KEY(k) ((k) & 0x1f)
-#define XET_VERSION "0.0.1"
+#define XET_VERSION "0.1.0"
 
 enum editorKey {
   BACKSPACE = 127,
@@ -252,6 +337,68 @@ int is_separator(int c){
   return isspace(c)||c=='\0'||
 	  strchr(",.()+-/*=`~&?<>[]{};:",c)!=NULL;
 }
+void createAnsiColor(char *dest, int r, int g, int b) {
+  snprintf(dest,20,"\x1b[38;2;%d;%d;%dm",r,g,b);
+}
+void createBgColor(char* dest,int r,int g, int b){
+  snprintf(dest,20,"\x1b[48;2;%d;%d;%dm",r,g,b);
+}
+
+// Function to parse a line and extract RGB values
+int parseLine(char *line, char *key, int *r, int *g, int *b) {
+    char *equals_pos;
+    char *comma1, *comma2;
+    while (*line == ' ' || *line == '\t') {
+        ++line;
+        if(*line=='\n'||*line=='\0'||*line=='#'){
+          return 0;
+        }
+    }
+
+    // Skip comments and empty lines
+    if (line[0] == '#' || line[0] == '\n' || line[0] == '\0') {
+        return 0;
+    }
+    // Find the '=' character
+    equals_pos = strchr(line, '=');
+    if (!equals_pos) {
+        return 0;
+    }
+    
+    // Extract key part
+    int key_len = equals_pos - line;
+    strncpy(key, line, key_len);
+    key[key_len] = '\0';
+    
+    // Remove any trailing spaces from key
+    while (key_len > 0 && key[key_len-1] == ' ') {
+        key[--key_len] = '\0';
+    }
+    
+    // Move to the value part (after '=')
+    char *value_start = equals_pos + 1;
+    
+    // Find first comma
+    comma1 = strchr(value_start, ',');
+    if (!comma1) return 0;
+    
+    // Find second comma
+    comma2 = strchr(comma1 + 1, ',');
+    if (!comma2) return 0;
+    
+    // Parse RGB values manually
+    *r = atoi(value_start);
+    *g = atoi(comma1 + 1);
+    *b = atoi(comma2 + 1);
+    if(*r>255) *r=255; 
+    if(*r<0) *r=0;
+    if(*g>255) *g=255; 
+    if(*g<0) *g=0;
+    if(*b>255) *b=255; 
+    if(*b<0) *b=0;
+    
+    return 1;
+}
 void setColor(){
   strcpy(E.dflt,"\x1b[38;2;180;180;180m");
   strcpy(E.digits,"\x1b[38;2;050;125;250m");
@@ -264,11 +411,71 @@ void setColor(){
   strcpy(E.bg,"\x1b[48;2;050;025;075m");
   strcpy(E.nbg,"\x1b[48;2;200;010;010m");
   strcpy(E.np,"\x1b[38;2;010;025;025m");
-}
-int rowHasOpenComment(erow *row) {
-    if (((row->hl && row->rsize && row->rsize>0 &&
-        row->hl[row->rsize-1] == HL_MLCOMMENT &&row->rsize <= 2) ||( row->render[row->rsize-2] != '*' || row->render[row->rsize-1] != '/')) &&(row->rsize>1)) {return 1;}
-    return 0;
+  FILE *file;
+    char line[256];
+    char key[50];
+    int r, g, b;
+    
+    // Open the configuration file
+    file = fopen("colors.config", "r");
+    if (!file) {
+        printf("Error: Could not open colors.config file\n");
+        return;
+    }
+    // Read file line by line
+    while (fgets(line, sizeof(line), file)) {
+        //printf("Debug: Reading line: %s", line);
+        if (parseLine(line, key, &r, &g, &b)) {
+            //printf("Debug: Parsed key='%s', RGB=(%d,%d,%d)\n", key, r, g, b);
+            
+            // Match the key and assign to appropriate structure member
+            if (strcmp(key, "default-color") == 0) {
+                createAnsiColor(E.dflt, r, g, b);
+                //printf("Debug: Set default_color\n");
+            }
+            else if (strcmp(key, "number-color") == 0) {
+                createAnsiColor(E.digits, r, g, b);
+                //printf("Debug: Set number\n");
+            }
+            else if (strcmp(key, "string-color") == 0) {
+                createAnsiColor(E.strings, r, g, b);
+                //printf("Debug: Set string\n");
+            }
+            else if (strcmp(key, "find-color") == 0) {
+                createAnsiColor(E.match, r, g, b);
+                //printf("Debug: Set find\n");
+            }
+            else if (strcmp(key, "comment-color") == 0) {
+                createAnsiColor(E.comments, r, g, b);
+                //printf("Debug: Set comment\n");
+            }
+            else if (strcmp(key, "keyword-color") == 0) {
+                createAnsiColor(E.keywords1, r, g, b);
+                //printf("Debug: Set keyword\n");
+            }
+            else if (strcmp(key, "type-color") == 0) {
+                createAnsiColor(E.keywords2, r, g, b);
+                //printf("Debug: Set type\n");
+            }
+            else if (strcmp(key, "separator-color") == 0) {
+                createAnsiColor(E.sep, r, g, b);
+                //printf("Debug: Set separator\n");
+            }
+            else if (strcmp(key, "background-color") == 0) {
+                createBgColor(E.bg, r, g, b);
+                //printf("Debug: Set background\n");
+            }
+            else if (strcmp(key, "exception-color") == 0) {
+                createBgColor(E.nbg, r, g, b);
+                //printf("Debug: Set exception\n");
+            }
+            else if (strcmp(key, "nonprint-color") == 0) {
+                createAnsiColor(E.np, r, g, b);
+                //printf("Debug: Set nonprint\n");
+            }       
+    }
+  }
+  fclose(file);
 }
 
 void updateSyntax(erow* row){
@@ -600,11 +807,10 @@ void Open(char* filename){
   char* line=NULL;
   size_t linecap=0;
   ssize_t linelen;
-  linelen=getline(&line,&linecap,fp);
   while((linelen=getline(&line,&linecap,fp))!=-1){
-    while(linelen>0&&(line[linelen-1]=='\n' ||
+    if(linelen&&(line[linelen-1]=='\n' ||
 		      line[linelen-1]=='\r'))
-	    linelen--;
+	    line[--linelen]='\0';
     insertRow(E.numrows,line,linelen);
   }
   free(line);
@@ -877,9 +1083,8 @@ void scroll(){
 }
 
 void drawRows(struct abuf *ab){
-  //abAppend(ab,"\x1b[2J",4);
-  abAppend(ab,E.bg,19);  
-  abAppend(ab,E.dflt,19);
+  //abAppend(ab,"\x1b[2J",4);  
+  abAppend(ab,E.dflt,strlen(E.dflt));
   int y;
   for(y=0;y<E.screenrows;y++){
           int filerow=y+E.rowoff;
@@ -910,18 +1115,18 @@ void drawRows(struct abuf *ab){
     for(j=0;j<len;j++){
       if(iscntrl(c[j])){
         char sym = (c[j]<=26)?'@'+c[j]:'?';
-	abAppend(ab,E.nbg,19);
-	abAppend(ab,E.np,19);
+	abAppend(ab,E.nbg,strlen(E.nbg));
+	abAppend(ab,E.np,strlen(E.np));
 	abAppend(ab,&sym,1);
-	abAppend(ab,E.bg,19);
-	abAppend(ab,E.dflt,19);
+	abAppend(ab,E.bg,strlen(E.bg));
+	abAppend(ab,E.dflt,strlen(E.dflt));
       }	    
       else if(hl[j]==HL_NORMAL){
-        abAppend(ab,E.dflt,19);
+        abAppend(ab,E.dflt,strlen(E.dflt));
 	abAppend(ab,&c[j],1);
       }
       else if(hl[j]==HL_SEP){
-        abAppend(ab,E.sep,19);
+        abAppend(ab,E.sep,strlen(E.sep));
 	abAppend(ab,&c[j],1);
       }
       else{
@@ -931,37 +1136,37 @@ void drawRows(struct abuf *ab){
 	//int clen=snprintf(buf,sizeof(buf),"\x1b[38;2;%d;%d;%dm",col.r,col.g,col.b);
 	//abAppend(ab,buf,clen);
 	if(hl[j]==HL_NUMBER){
-	  abAppend(ab,E.digits,19);
+	  abAppend(ab,E.digits,strlen(E.digits));
           abAppend(ab,&c[j],1);
 	}
 	if(hl[j]==HL_SEP){
-	  abAppend(ab,E.sep,19);
+	  abAppend(ab,E.sep,strlen(E.sep));
 	  abAppend(ab,&c[j],1);
 	}
 	if(hl[j]==HL_MATCH){
-          abAppend(ab,E.match,19);
+          abAppend(ab,E.match,strlen(E.match));
 	  abAppend(ab,&c[j],1);
 	}
 	if(hl[j]==HL_STRING){
-	  abAppend(ab,E.strings,19);
+	  abAppend(ab,E.strings,strlen(E.strings));
 	  abAppend(ab,&c[j],1);
 	}
 	if(hl[j]==HL_COMMENT||hl[j]==HL_MLCOMMENT){
-          abAppend(ab,E.comments,19);
+          abAppend(ab,E.comments,strlen(E.comments));
 	  abAppend(ab,&c[j],1);
 	}
 
 	if(hl[j]==HL_KEYWORD1){
-          abAppend(ab,E.keywords1,19);
+          abAppend(ab,E.keywords1,strlen(E.keywords1));
 	  abAppend(ab,&c[j],1);
 	}
 	if(hl[j]==HL_KEYWORD2){
-	  abAppend(ab,E.keywords2,19);
+	  abAppend(ab,E.keywords2,strlen(E.keywords2));
 	  abAppend(ab,&c[j],1);
 	}
       }
     }
-    abAppend(ab,E.dflt,19);
+    abAppend(ab,E.dflt,strlen(E.dflt));
     }
     abAppend(ab,"\x1b[K",3);
     abAppend(ab, "\r\n",2);
@@ -1003,8 +1208,9 @@ void refreshScreen(){
   scroll();
   struct abuf ab = ABUF_INIT;
   abAppend(&ab, "\x1b[?25l",6);
-  //abAppend(&ab, "\x1b[2J", 4);
+  abAppend(&ab, "\x1b[2J", 4);
   abAppend(&ab, "\x1b[H", 3);
+  abAppend(&ab,E.bg,strlen(E.bg));
   drawRows(&ab);
   drawStatusBar(&ab);
   drawMessageBar(&ab);
@@ -1046,8 +1252,8 @@ void initEditor(){
 }
 int main(int argc,char *argv[]){
   enableRawMode();
-  setColor();
   initEditor();
+  setColor();
   if(argc>=2){
     Open(argv[1]);
   }

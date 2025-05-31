@@ -37,19 +37,27 @@ git clone https://github.com/Plasmakatana/Xet-Code-Editor.git
   make
 ```
 ## For Windows
-  -Install any 64-bit c/c++ compiler
+  -Install MSYS2
   ### Git clone into any directory
   ```powershell
 git clone https://github.com/Plasmakatana/Xet-Code-Editor.git
 ```
   ### Run the following commands depending on the compiler
   ```powershell
-gcc -o Xet main.c -std=c99
+gcc -o Xet.exe main.c -std=c99
 ```
   OR
   ```powershell
-g++ -o Xet main.c
+g++ -o Xet.exe main.c
 ```
+- Find all dependencies using:
+```bash
+ldd Xet.exe
+```
+- Move all dependencies to the same folder
+## OR
+- Download the windows release
+- Extract the folder and start using the editor
 # Usage
   - After installation, either browse to the directory of installation
     or

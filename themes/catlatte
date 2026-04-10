@@ -1,0 +1,14 @@
+#this file defines colors for syntax highligting in the code editor
+#enter values in the form of: R(0-255),G(0-255),B(0-255)
+
+default-color=076,079,105
+number-color=030,102,245
+string-color=064,160,043
+find-color=136,057,239
+comment-color=108,111,133
+keyword-color=210,015,057
+type-color=223,142,029
+separator-color=023,146,153
+background-color=239,241,245
+exception-color=204,208,218
+nonprint-color=230,069,083

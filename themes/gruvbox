@@ -5,33 +5,33 @@
 default-color=180,180,180
 
 #color of numbers
-number-color=050,150,250
+number-color=069,133,136
 
 #color of strings
-string-color=050,250,100
+string-color=152,151,026
 
 #color of found words
-find-color=250,075,250
+find-color=177,098,134
 
 #color of comments
-comment-color=100,100,100
+comment-color=168,153,132
 
 #color of keyword (define, import, main etc.)
-keyword-color=250,160,010
+keyword-color=215,153,033
 
 #color of types (int, float, char etc.)
-type-color=250,150,200
+type-color=214,093,014
 
 #color of separators({},[],.,-,=,*,/ etc)
-separator-color=250,200,010
+separator-color=142,192,124
 
 #color of background
-background-color=050,010,075
+background-color=060,056,054
 
 #color of background when exceptional character printed
-exception-color=200,010,010
+exception-color=102,092,084
 
 #color of text when exceptional character printed
-nonprint-color=010,025,025
+nonprint-color=204,036,029
 
 #

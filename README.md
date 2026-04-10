@@ -5,10 +5,12 @@ On Ghostty
 ![Ghostty](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-ghostty.png)
 On Kitty
 ![Kitty](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-kitty.png)
-### C and Python support
+### Multilanguage support
 ![support](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-py.png)
 ### Find feature
 ![search](https://github.com/Plasmakatana/Xet-Code-Editor/blob/main/xet-search.png)
+##THEMES have been added
+- add your own theme files or use the provided 4 themes!
 # Installation
 ## For linux
   Install dependencies
@@ -96,4 +98,5 @@ ldd Xet.exe
   - Large movement keys:<kbd>PgUp</kbd><kbd>PgDn</kbd><kbd>Home</kbd><kbd>End</kbd>
   - Find: <kbd>Ctrl</kbd>+<kbd>F</kbd>
   - Save: <kbd>Ctrl</kbd>+<kbd>S</kbd>
+  - Change Theme: <kbd>Ctrl</kbd>+<kbd>T</kbd>
   - Quit: <kbd>Ctrl</kbd>+<kbd>Q</kbd> (twice in case of edited file)

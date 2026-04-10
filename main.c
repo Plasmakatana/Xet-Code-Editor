@@ -69,6 +69,7 @@ struct editorConfig{
   int dirty;
   struct termios orig_termios;
   char* filename;
+  char* themename;
   char statusmsg[80];
   time_t statusmsg_time;
   char dflt[20];
@@ -212,7 +213,7 @@ char* editorPrompt(char* prompt,void(*callback)(char*,int));
 
 /*def*/
 #define CTRL_KEY(k) ((k) & 0x1f)
-#define XET_VERSION "0.1.0"
+#define XET_VERSION "0.2.0"
 
 enum editorKey {
   BACKSPACE = 127,
@@ -227,12 +228,19 @@ enum editorKey {
   PAGE_DOWN
 };
 
-
+/*logging*/
+void logErr(const char *s){
+  FILE *logfile;
+  logfile=fopen("testing/log","a");
+  fprintf(logfile,"error :%s",s);
+  fclose(logfile);
+}
 
 /* terminal */
 
 void die(const char *s){
   perror(s);
+  logErr(s);
   exit(1);
 }
 
@@ -338,10 +346,10 @@ int is_separator(int c){
 	  strchr(",.()+-/*=`~&?<>[]{};:",c)!=NULL;
 }
 void createAnsiColor(char *dest, int r, int g, int b) {
-  snprintf(dest,20,"\x1b[38;2;%d;%d;%dm",r,g,b);
+  snprintf(dest,20,"\x1b[38;2;%03d;%03d;%03dm",r,g,b);
 }
 void createBgColor(char* dest,int r,int g, int b){
-  snprintf(dest,20,"\x1b[48;2;%d;%d;%dm",r,g,b);
+  snprintf(dest,20,"\x1b[48;2;%03d;%03d;%03dm",r,g,b);
 }
 
 // Function to parse a line and extract RGB values
@@ -399,6 +407,54 @@ int parseLine(char *line, char *key, int *r, int *g, int *b) {
     
     return 1;
 }
+char *strlwr(char *str) {
+    unsigned char *p = (unsigned char *)str;
+    while (*p!='\0') {
+        *p = tolower((unsigned char)*p);
+        p++;
+    }
+    return str;
+}
+
+void setTheme(){
+  FILE* fptr;
+  fptr=fopen("theme.cfg","w");
+  fclose(fptr);
+  if(E.themename!=NULL){
+    fptr=fopen("theme.cfg","w");
+    fprintf(fptr,"theme=%s",E.themename);
+    fclose(fptr);
+    return;
+  }
+ 
+  fptr=fopen("theme.cfg","w");
+  fprintf(fptr,"theme=gruvbox");
+  fclose(fptr);
+}
+void getTheme(){
+  FILE* fptr;
+  fptr=fopen("theme.cfg","r");
+  if(!fptr){die ("THEME");}
+  char line[256];
+  while (fgets(line, sizeof(line), fptr)!=NULL) {
+    if(line[0]=='#'){continue;}
+    if(strstr(line,"theme")==NULL){
+      fclose(fptr);
+      setTheme();
+      return;
+    }
+    char* p=strrchr(line,'=');if(!p){continue;}p++;
+    while(*p==' ' || *p=='.' || *p=='\n' || *p=='\t'){
+      p++;
+    }
+    char* copy = malloc(strlen(p)+1);
+    strncpy(copy,p,strlen(p));
+    copy[strlen(p)]='\0';
+    E.themename=(strdup(strlwr(copy)));
+    
+  }
+  fclose(fptr);
+}
 void setColor(){
   strcpy(E.dflt,"\x1b[38;2;180;180;180m");
   strcpy(E.digits,"\x1b[38;2;050;125;250m");
@@ -415,15 +471,21 @@ void setColor(){
     char line[256];
     char key[50];
     int r, g, b;
-    
     // Open the configuration file
-    file = fopen("colors.config", "r");
+    if(E.themename==NULL){getTheme();}
+    char themefile[100];
+    E.themename[strcspn(E.themename, "\n")] = 0;
+    snprintf(themefile,sizeof(themefile),"./themes/%s",E.themename);
+    file = fopen(themefile, "r");
     if (!file) {
-        printf("Error: Could not open colors.config file\n");
+        setStatusMessage("cant open themefile");
+        logErr("Error: Could not open theme file\n");
+        logErr(E.themename);
+        logErr(themefile);
         return;
     }
     // Read file line by line
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file)!=NULL) {
         //printf("Debug: Reading line: %s", line);
         if (parseLine(line, key, &r, &g, &b)) {
             //printf("Debug: Parsed key='%s', RGB=(%d,%d,%d)\n", key, r, g, b);
@@ -803,7 +865,7 @@ void Open(char* filename){
   E.filename=strdup(filename);
   selectSyntaxHighlight();
   FILE* fp=fopen(filename,"r");
-  if(!fp) die("open");
+  if(!fp) {die("open");logErr(filename);}
   char* line=NULL;
   size_t linecap=0;
   ssize_t linelen;
@@ -816,6 +878,15 @@ void Open(char* filename){
   free(line);
   fclose(fp);
   E.dirty=0;
+}
+void changeTheme(){
+  E.themename=editorPrompt("Enter Theme Name %s (ESC to cancel)",NULL);
+  if(E.themename==NULL){
+    setStatusMessage("Theme unchanged");
+    return;
+  }
+  setTheme();
+
 }
 void Save(){
   if(E.filename==NULL){
@@ -1015,6 +1086,9 @@ void processKeypress(){
     case CTRL_KEY('s'):
       Save();
       break;
+    case CTRL_KEY('t'):
+      changeTheme();
+      break;
     case HOME_KEY:
       E.cx=0;
       break;
@@ -1206,6 +1280,7 @@ void drawMessageBar(struct abuf* ab){
 
 void refreshScreen(){
   scroll();
+  setColor();
   struct abuf ab = ABUF_INIT;
   abAppend(&ab, "\x1b[?25l",6);
   abAppend(&ab, "\x1b[2J", 4);
@@ -1242,12 +1317,14 @@ void initEditor(){
   E.row=NULL;
   E.dirty=0;
   E.filename=NULL;
+  E.themename=NULL;
   E.statusmsg[0]='\0';
   E.statusmsg_time=0;
   E.syntax=NULL;
   if(getWindowSize(&E.screenrows,&E.screencols)==-1)
 		  die("getWindowSize");
   E.screenrows-=2;
+  
   
 }
 int main(int argc,char *argv[]){
@@ -1258,8 +1335,10 @@ int main(int argc,char *argv[]){
     Open(argv[1]);
   }
   setStatusMessage(
-	"HELP: Ctrl-S = save | Ctrl-F = find | Ctrl-Q = quit");
+	"HELP: Ctrl-S = save | Ctrl-T = Change-Theme | Ctrl-F = find | Ctrl-Q = quit");
   while(1){
+    getWindowSize(&E.screenrows,&E.screencols);
+    E.screenrows-=2;
     refreshScreen();
     processKeypress();
   }
